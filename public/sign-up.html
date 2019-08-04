@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <title>Create User</title>    
+    <textarea id="username_submission" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="login_information" id="username" placeholder="Username" id="text" rows="1" cols="25"></textarea><br><br>
+    <textarea id="password_submission" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="login_information" id="password" placeholder="Password" id="text" rows="1" cols="25"></textarea><br>
+    <div style="margin-top: 40px;">
+        <button id="submit">Submit</button>  
+    </div>  
+    <head>
+        <style>
+            body {
+                text-align: center;
+                padding-top: 30px;
+            }
+            textarea {
+                text-align: center; 
+                border-radius: 5px;  
+                color: grey;      
+            }
+        </style>
+    </head>
+    <body>
+        <script src="index.js"></script>
+        <script>
+            const sub_button = document.getElementById("submit");
+    sub_button.addEventListener('click',async event => {
+        const username_sub = document.getElementById("username_submission").value;
+        const password_sub = document.getElementById("password_submission").value;
+        let activity = 'inactive';
+
+        const userdata = { username_sub, password_sub, activity };
+
+        const submissiondata = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userdata)
+        }
+
+        const usersubmission_response = await fetch('/api2', submissiondata);
+        const json_user = await usersubmission_response.json();
+        console.log(json_user);
+        window.close();
+    });
+
+    getData();
+async function getData() {
+    const response = await fetch('/api2');
+    const userdata = await response.json();
+
+ console.log(userdata)   
+}
+        </script>
+    </body>
+</html>

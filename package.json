@@ -1,0 +1,20 @@
+{
+  "name": "jacob-dumas",
+  "version": "1.0.0",
+  "description": " This is a server created by Jacob Dumas",
+  "main": "public",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "example",
+    "data",
+    "communication"
+  ],
+  "author": "Jacob Dumas",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nedb": "^1.8.0"
+  }
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<div class="login_body">
+    <textarea autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="login_information"
+        id="username" placeholder="Username" rows="1" cols="25"></textarea><br><br>
+    <textarea autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="login_information"
+        id="password" placeholder="Password" rows="1" cols="25"></textarea><br>
+    <div style="margin-top: 100px; margin-left: 150px;"><a class="sign_up_button" href="" onclick=" createUser()">Sign
+            up </a><button id="check_info" class="login_button" href="">Login</button></div>
+</div>
+<title>Sign in or Sign up</title>
+
+<head>
+    <style>
+        .login_body {
+            text-align: center;
+            margin-top: 120px;
+            margin-left: 100px;
+            width: 300px;
+            height: 200px;
+            background: linear-gradient(15deg, rgb(212, 173, 173), rgb(212, 128, 73));
+            padding-top: 50px;
+            border-radius: 8px;
+            box-shadow: inset -4px -6.5px 8px rgba(0, 0, 0, 0.15);
+            border: 1px solid black;
+        }
+
+        textarea {
+            text-align: center;
+            border-radius: 5px;
+            background-color: rgba(255, 222, 172, 0.253);
+            color: grey;
+        }
+
+        .login_button {
+            padding: 4px 15px;
+            border-radius: 6px;
+            background-color: rgb(238, 200, 182);
+            color: black;
+            text-decoration: none;
+        }
+
+        .sign_up_button:link {
+            font-size: 10pt;
+            color: black;
+            text-decoration: none;
+        }
+
+        .sign_up_button:visited {
+            font-size: 10pt;
+            color: black;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        function createUser() {
+            window.open("/sign-up.html", "Create a User", "width=350,height=300,toolbar=0,status=0;");
+        }
+
+        let key = 0;
+
+        check_info = document.getElementById("check_info");
+        check_info.addEventListener('click', async event => {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const response = await fetch('/api2');
+            const data = await response.json();
+
+            for (item of data) {
+                if (item.text == undefined) {
+                    if ((item.username_sub != username) && (item.password_sub != password)) {
+
+                    } else if ((item.username_sub == username) && (item.password_sub == password)) {
+                        key = 1;
+                    }
+                }
+            }
+            if(key == 1){
+                console.log("success");
+                window.location.href = "conversation.html";
+                key = 0;
+            } else {
+                console.log("fail");
+            }
+        });
+    </script>
+    <script src="./index.js"></script>
+</body>
+
+</html>
